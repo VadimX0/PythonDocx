@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+Создание документа
+{% endblock %}
+
+{% block content %}
+<head> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="jquery.js"></script>
+    <script language="javascript">
+ $(document).ready(function(){
+   $(".chkcvalues").change(function(){
+      var val = $(this).val();
+      if ($('#1').is(':checked') && $('#2').is(':checked')){
+      $("#myform").attr("action", "download2");
+      }
+      else if (val==2) {
+      $("#myform").attr("action", "download3");
+      }
+      else if (val==1){
+      $("#myform").attr("action", "download1");
+      }
+   });
+ });
+    </script>
+</head>
+  <form id="myform" method="GET" action="">
+      {% csrf_token %}
+      <p style="border:2px solid #555; border-radius:5px; width: 200px; text-align:center;  margin:20px; padding:10px;">
+      Первый документ <input id="1" type = "checkbox" value="1" class="chkcvalues" name="doc1"><br>
+      Второй документ <input id="2" type = "checkbox" value="2" class="chkcvalues" name="doc2"><br></p>
+      <h2>Как назвать файл?</h2>
+       {{ form.name }}<br>
+      <h2>Ваши ФИО</h2>
+      {{ form.naming }}<br>
+      <h2>Название организации</h2>
+      {{ form.org }}<br>
+      <button id = "but2" type="submit" class="btn btn-success">Создать документ</button>
+      <span>{{ error }}</span>
+  </form>
+{% endblock %}

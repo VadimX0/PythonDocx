@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+{% block title %}
+Чекбоксы
+{% endblock %}
+
+{% block content %}
+<head> <script src="{{ STATIC_URL }}js/jquery.js" ></script>
+<script>
+   $(document).ready(function()
+   {
+      $('.chkcvalues').click(function()
+      {
+         var txt="";
+         $('.chkcvalues:checked').each(function()
+         {
+            txt+=$(this).val()+" "
+         });
+         txt=txt.substring(0, txt.length-1);
+         $('#txtvalues').val(txt)
+      });
+   });
+</script>
+</head>
+<hr/>
+  <form method="post">
+      {% csrf_token %}
+      Checkbox 1<input type = "checkbox" value="1" class="chkcvalues"><br>
+      Checkbox 2<input type = "checkbox" value="2" class="chkcvalues"><br>
+      Checkbox 3<input type = "checkbox" value = "3" class="chkcvalues" ><br>
+      <hr/>
+      <input type="text" name="coursename" id="txtvalues" readonly/>
+      <input id="but1" type="submit" value="Insert Record" onclick="return alert('Данные успешно отправлены')"/>
+  </form>
+{% endblock %}
